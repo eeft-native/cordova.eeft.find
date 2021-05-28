@@ -1,4 +1,4 @@
-package Neux.cordova.RootDetection;
+package cordova.eeft.find;
  
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
