@@ -1,2 +1,2 @@
-# Neux.cordova.rootDetection
-Neux cordova plugin for root detection on android/ios
+# cordova.eeft.find
+cordova.eeft.find for root detection on android/ios
