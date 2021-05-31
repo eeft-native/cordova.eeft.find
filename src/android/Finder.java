@@ -7,6 +7,9 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PermissionHelper;
+
+import java.util.Arrays;
+import java.util.List;
  
 import org.json.JSONArray;
 import org.json.JSONException;
