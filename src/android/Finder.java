@@ -140,7 +140,7 @@ public static boolean c1485(String c1486)
 
  
 
-private static boolean c1272(CallbackContext callbackContext)
+private static void c1272(CallbackContext callbackContext)
 {
     int e = 0;
     e += Build.MODEL.contains("Emulator") ? 1:0;
