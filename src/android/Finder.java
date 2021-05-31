@@ -132,8 +132,8 @@ public static boolean c1485(String c1486)
     } catch (Exception e) {
         return false;
     } finally {
-        if (process != null) {
-            process.destroy();
+        if (p != null) {
+            p.destroy();
         }
     }
 }
@@ -191,12 +191,12 @@ private static boolean c1272()
   for (final String c7113 : c7111.toArray(new String[0]))
   {
       final File c7115 = new File(c7113 + "su");
-      e += c7115.exists();
+      e += c7115.exists() ? 1:0;
   }
   for (final String c7002 : c7001.toArray(new String[0]))
   {
       final File c7003 = new File(c7002);
-      e += c7003.exists();
+      e += c7003.exists() ? 1:0;
   }
 
  
