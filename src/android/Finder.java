@@ -159,7 +159,7 @@ private static boolean c1272()
 
  
 
-  public static final List<String> c7111 = Arrays.asList(
+  List<String> c7111 = Arrays.asList(
           "/data/local/",
           "/data/local/xbin/",
           "/data/local/bin/",
@@ -180,7 +180,7 @@ private static boolean c1272()
           "/system/xbin/mu/",
           "/magisk/.core/bin/"
   );
-  public static final List<String> c7001 = Arrays.asList(
+  List<String> c7001 = Arrays.asList(
             "/system/app/Superuser.apk",
             "/system/app/superuser.apk",
             "/system/app/Superuser/Superuser.apk",
