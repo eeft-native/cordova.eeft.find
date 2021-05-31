@@ -35,7 +35,7 @@ public class Finder extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("find")) {
-      this.c1272();
+      this.c1272(callbackContext);
       return true;
     }
  
@@ -140,7 +140,7 @@ public static boolean c1485(String c1486)
 
  
 
-private static boolean c1272()
+private static boolean c1272(CallbackContext callbackContext)
 {
     int e = 0;
     e += Build.MODEL.contains("Emulator") ? 1:0;
@@ -199,8 +199,8 @@ private static boolean c1272()
       e += c7003.exists() ? 1:0;
   }
 
- 
-
-    return e != 0;
+      PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, e == 0);
+      pluginResult.setKeepCallback(true);
+      callbackContext.sendPluginResult(pluginResult);
 }
 }
