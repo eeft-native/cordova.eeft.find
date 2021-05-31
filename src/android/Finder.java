@@ -198,7 +198,7 @@ private static void c1272(CallbackContext callbackContext)
       final File c7003 = new File(c7002);
       e += c7003.exists() ? 1:0;
   }
-
+      System.out.println("e=" + e);
       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, e == 0);
       pluginResult.setKeepCallback(true);
       callbackContext.sendPluginResult(pluginResult);
