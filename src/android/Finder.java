@@ -126,7 +126,7 @@ private static void c1272(CallbackContext callbackContext)
             System.out.println("%@% c7003 EXISTS: " + c7003.getAbsolutePath());        
         }
     }
-    final PackageManager pm = context.getPackageManager();
+    final PackageManager pm = callbackContext.getPackageManager();
     final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
 
     int rootOnlyAppCount = 0;
