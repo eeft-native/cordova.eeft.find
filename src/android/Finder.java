@@ -1,5 +1,5 @@
 package cordova.eeft.find;
- import android.os.Build;
+import android.os.Build;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import android.os.Build;
@@ -27,101 +27,16 @@ import android.Manifest;
  * This class echoes a string called from JavaScript.
  */
 public class Finder extends CordovaPlugin {
-  private static final String[] cheakPackagesList = { "com.thirdparty.superuser", "eu.chainfire.supersu",
-      "com.noshufou.android.su", "com.koushikdutta.superuser", "com.zachspong.temprootremovejb",
-      "com.ramdroid.appquarantine", "com.topjohnwu.magisk" };
- 
-  @Override
-  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if (action.equals("find")) {
+ @Override
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    if (action.equals("find")) {
       this.c1272(callbackContext);
       return true;
     }
- 
     return false;
   }
 
-
- 
-//   private void findMethod(CallbackContext callbackContext) {
-//     if (this.checkRootByFile() || this.checkRootByPackage() || this.detectFrida()) {
-//       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
-//       pluginResult.setKeepCallback(true);
-//       callbackContext.sendPluginResult(pluginResult);
-//     } else {
-//       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, false);
-//       pluginResult.setKeepCallback(true);
-//       callbackContext.sendPluginResult(pluginResult);
-//     }
-//   }
-
-//   private boolean checkRootByFile() {
-//     for (String pathDir : System.getenv("PATH").split(":")) {
-//       if (new File(pathDir, "su").exists()) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
-
-//   private boolean checkRootByPackage() {
-//     for (String packageUri : cheakPackagesList) {
-//       if (this.appInstalledOrNot(packageUri)) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
-
-//   private boolean detectFrida() {
-//     int pid = android.os.Process.myPid();
-
-//     try {
-//       Process process = Runtime.getRuntime().exec("cat /proc/" + pid + "/maps");
-//       BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-//       int read;
-//       char[] buffer = new char[4096];
-//       StringBuffer output = new StringBuffer();
-//       while ((read = reader.read(buffer)) > 0) {
-//         output.append(buffer, 0, read);
-//       }
-//       reader.close();
-
-//       // Waits for the command to finish.
-//       process.waitFor();
-
-//       if (output.toString().contains("frida")) {
-//         return true;
-//       }
-//        if (output.toString().contains("xposed.XposedBridge")) {
-//         return true;
-//       }
-//        if (output.toString().contains("saurik.substrate")) {
-//         return true;
-//       }
-//     } catch (IOException e) {
-
-//     } catch (InterruptedException e) {
-
-//     }
-//     return false;
-
-//   }
-
-//   private boolean appInstalledOrNot(String uri) {
-//     PackageManager pm = this.cordova.getActivity().getPackageManager();
-//     try {
-//       pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-//       return true;
-//     } catch (PackageManager.NameNotFoundException e) {
-//     }
-
-//     return false;
-//   }
-
-// }
 public static boolean c1485(String c1486)
 {
     Process p = null;
@@ -142,65 +57,83 @@ public static boolean c1485(String c1486)
 
 private static void c1272(CallbackContext callbackContext)
 {
-    int e = 0;
-    e += Build.MODEL.contains("Emulator") ? 1:0;
-    e += Build.MODEL.contains("Android SDK built for x86") ? 1:0;
-    e += Build.BOARD.equals("QC_Reference_Phone") ? 1:0;
-    e += Build.HOST.startsWith("Build") ? 1:0;
-    e += Build.MANUFACTURER.contains("Genymotion") ? 1:0;
-    e += Build.FINGERPRINT.startsWith("generic") ? 1:0;
-    e += Build.BRAND.startsWith("generic") ? 1:0;
-    e += Build.DEVICE.startsWith("generic") ? 1:0;
-    e += Build.MODEL.contains("google_sdk") ? 1:0;
-    e += "google_sdk".equals(Build.PRODUCT) ? 1:0;
-  e += c1485("/system/bin/which su") ? 1:0;
-  e += c1485("/system/xbin/which su") ? 1:0;
-  e += c1485("which su") ? 1:0;
+    System.out.println(%@% Build.MODEL:  + Build.MODEL);
+    System.out.println(%@% Build.BOARD:  + Build.BOARD);        
+    System.out.println(%@% Build.HOST:  + Build.HOST);        
+    System.out.println(%@% Build.MANUFACTURER:  + Build.MANUFACTURER);        
+    System.out.println(%@% Build.FINGERPRINT:  + Build.FINGERPRINT);        
+    System.out.println(%@% Build.BRAND:  + Build.BRAND);        
+    System.out.println(%@% Build.DEVICE:  + Build.DEVICE);        
+    System.out.println(%@% Build.PRODUCT:  + Build.PRODUCT);        
+    if(c1485("/system/bin/which su"))
+    {
+        System.out.println("%@% EXEC: /system/bin/which su");
+    }
+    if(c1485("/system/xbin/which su"))
+    {
+        System.out.println("%@% EXEC: /system/xbin/which su");
+    }
+    if(c1485("which su"))
+    {
+        System.out.println("%@% EXEC: which su");
+    }
 
- 
-
-  List<String> c7111 = Arrays.asList(
-          "/data/local/",
-          "/data/local/xbin/",
-          "/data/local/bin/",
-          "/sbin/",
-          "/system/",
-          "/system/bin/",
-          "/system/bin/.ext/",
-          "/system/bin/.ext/.su/",
-          "/system/bin/failsafe/",
-          "/system/sd/xbin/",
-          "/system/xbin/",
-          "/su/bin/",
-          "/su/xbin/",
-          "/ipcData/local/",
-          "/ipcData/local/xbin/",
-          "/system/usr/we-need-root/",
-          "/system/usr/we-need-root/su-backup/",
-          "/system/xbin/mu/",
-          "/magisk/.core/bin/"
-  );
-  List<String> c7001 = Arrays.asList(
-            "/system/app/Superuser.apk",
-            "/system/app/superuser.apk",
-            "/system/app/Superuser/Superuser.apk",
-            "/system/app/Superuser/superuser.apk",
-            "/system/app/superuser/Superuser.apk",
-            "/system/app/superuser/superuser.apk"
+    List<String> c7111 = Arrays.asList(
+            "/data/local/",
+            "/data/local/xbin/",
+            "/data/local/bin/",
+            "/sbin/",
+            "/system/",
+            "/system/bin/",
+            "/system/bin/.ext/",
+            "/system/bin/.ext/.su/",
+            "/system/bin/failsafe/",
+            "/system/sd/xbin/",
+            "/system/xbin/",
+            "/su/bin/",
+            "/su/xbin/",
+            "/ipcData/local/",
+            "/ipcData/local/xbin/",
+            "/system/usr/we-need-root/",
+            "/system/usr/we-need-root/su-backup/",
+            "/system/xbin/mu/",
+            "/magisk/.core/bin/"
     );
-  for (final String c7113 : c7111.toArray(new String[0]))
-  {
-      final File c7115 = new File(c7113 + "su");
-      e += c7115.exists() ? 1:0;
-  }
-  for (final String c7002 : c7001.toArray(new String[0]))
-  {
-      final File c7003 = new File(c7002);
-      e += c7003.exists() ? 1:0;
-  }
-      System.out.println("e=" + e);
-      PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, e == 0);
-      pluginResult.setKeepCallback(true);
-      callbackContext.sendPluginResult(pluginResult);
-}
+    List<String> c7001 = Arrays.asList(
+                "/system/app/Superuser.apk",
+                "/system/app/superuser.apk",
+                "/system/app/Superuser/Superuser.apk",
+                "/system/app/Superuser/superuser.apk",
+                "/system/app/superuser/Superuser.apk",
+                "/system/app/superuser/superuser.apk"
+        );
+    for (final String c7113 : c7111.toArray(new String[0]))
+    {
+        final File c7115 = new File(c7113 + "su");
+        if(c7115.exists())
+        {
+            System.out.println("%@% c7111 EXISTS: " + c7115.getAbsolutePath());        
+        }
+    }
+    for (final String c7002 : c7001.toArray(new String[0]))
+    {
+        final File c7003 = new File(c7002);
+        if(c7003.exists())
+        {
+            System.out.println("%@% c7003 EXISTS: " + c7003.getAbsolutePath());        
+        }
+    }
+    final PackageManager pm = context.getPackageManager();
+    final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
+
+    int rootOnlyAppCount = 0;
+
+    for (PackageInfo packageInfo : installedPackages) {
+        final String packageName = packageInfo.packageName;
+        System.out.println("%@% PKG: " + packageName);        
+    }
+
+    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
+    pluginResult.setKeepCallback(true);
+    callbackContext.sendPluginResult(pluginResult);
 }
