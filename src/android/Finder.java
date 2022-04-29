@@ -136,4 +136,5 @@ private static void c1272(CallbackContext callbackContext)
     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
     pluginResult.setKeepCallback(true);
     callbackContext.sendPluginResult(pluginResult);
+	}
 }
