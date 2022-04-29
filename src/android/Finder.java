@@ -2,9 +2,9 @@ package cordova.eeft.find;
 import android.os.Build;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+//import android.content.Context;
+//import android.content.pm.PackageInfo;
+//import android.content.pm.PackageManager;
 import android.os.Build;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -126,15 +126,13 @@ private static void c1272(CallbackContext callbackContext)
             System.out.println("%@% c7003 EXISTS: " + c7003.getAbsolutePath());        
         }
     }
-    final PackageManager pm = callbackContext.getPackageManager();
-    final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
+    //final PackageManager pm = callbackContext.getPackageManager();
+    //final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
 
-    int rootOnlyAppCount = 0;
-
-    for (PackageInfo packageInfo : installedPackages) {
-        final String packageName = packageInfo.packageName;
-        System.out.println("%@% PKG: " + packageName);        
-    }
+    //for (PackageInfo packageInfo : installedPackages) {
+    //    final String packageName = packageInfo.packageName;
+    //    System.out.println("%@% PKG: " + packageName);        
+    //}
 
     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
     pluginResult.setKeepCallback(true);
