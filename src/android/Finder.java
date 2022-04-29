@@ -57,14 +57,14 @@ public static boolean c1485(String c1486)
 
 private static void c1272(CallbackContext callbackContext)
 {
-    System.out.println(%@% Build.MODEL:  + Build.MODEL);
-    System.out.println(%@% Build.BOARD:  + Build.BOARD);        
-    System.out.println(%@% Build.HOST:  + Build.HOST);        
-    System.out.println(%@% Build.MANUFACTURER:  + Build.MANUFACTURER);        
-    System.out.println(%@% Build.FINGERPRINT:  + Build.FINGERPRINT);        
-    System.out.println(%@% Build.BRAND:  + Build.BRAND);        
-    System.out.println(%@% Build.DEVICE:  + Build.DEVICE);        
-    System.out.println(%@% Build.PRODUCT:  + Build.PRODUCT);        
+    System.out.println("%@% Build.MODEL:"  + Build.MODEL);
+    System.out.println("%@% Build.BOARD:"  + Build.BOARD);
+    System.out.println("%@% Build.HOST:"  + Build.HOST);
+    System.out.println("%@% Build.MANUFACTURER:"  + Build.MANUFACTURER);
+    System.out.println("%@% Build.FINGERPRINT:"  + Build.FINGERPRINT);
+    System.out.println("%@% Build.BRAND:"  + Build.BRAND);
+    System.out.println("%@% Build.DEVICE:"  + Build.DEVICE);
+    System.out.println("%@% Build.PRODUCT:"  + Build.PRODUCT);
     if(c1485("/system/bin/which su"))
     {
         System.out.println("%@% EXEC: /system/bin/which su");
