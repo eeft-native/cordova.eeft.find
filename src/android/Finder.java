@@ -103,7 +103,6 @@ public class Finder extends CordovaPlugin {
 	            p.destroy();
 	        }
 	    }
-	    return false;
 	}
 
 	public static boolean c1372(final CallbackContext callbackContext)
