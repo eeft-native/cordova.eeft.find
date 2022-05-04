@@ -78,7 +78,7 @@ public class Finder extends CordovaPlugin {
 	       Context context = this.cordova.getActivity().getApplicationContext();
 	       //Finder finder = new Finder();
 
-	       boolean checkFinder = finder.c1272(context);
+	       boolean checkFinder = Finder.c1272(context);
 
 	       System.out.println("checkFinder: " + checkFinder);
 
@@ -175,13 +175,13 @@ public class Finder extends CordovaPlugin {
 	        }
 	    }
 	    
-	    final PackageManager pm = callbackContext.getPackageManager();
-	    final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
+	    //final PackageManager pm = callbackContext.getPackageManager();
+	    //final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
 
-	    for (PackageInfo packageInfo : installedPackages) {
-	        final String packageName = packageInfo.packageName;
-	        System.out.println("@$@ PKG: " + packageName);        
-	    }
+	    //for (PackageInfo packageInfo : installedPackages) {
+	    //    final String packageName = packageInfo.packageName;
+	    //    System.out.println("@$@ PKG: " + packageName);        
+	    //}
 
 	  	return true;
 	}
