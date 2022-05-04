@@ -76,9 +76,9 @@ public class Finder extends CordovaPlugin {
 	private PluginResult c1272(final JSONArray args, final CallbackContext callbackContext) {
 	   try {
 	       Context context = this.cordova.getActivity().getApplicationContext();
-	       Finder finder = new Finder(context);
+	       //Finder finder = new Finder();
 
-	       boolean checkFinder = finder.c1272();
+	       boolean checkFinder = finder.c1272(context);
 
 	       System.out.println("checkFinder: " + checkFinder);
 
@@ -106,7 +106,7 @@ public class Finder extends CordovaPlugin {
 	    return false;
 	}
 
-	public boolean c1272()
+	public static boolean c1272(final CallbackContext callbackContext)
 	{
 	    System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
 	    System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
