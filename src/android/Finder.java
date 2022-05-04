@@ -13,6 +13,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 //import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
+import org.apache.cordova.PluginResult.Status;
 import org.apache.cordova.PermissionHelper;
 
 import java.util.Arrays;
@@ -105,7 +106,7 @@ public class Finder extends CordovaPlugin {
 	    return false;
 	}
 
-	public static boolean c1272()
+	public boolean c1272()
 	{
 	    System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
 	    System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
