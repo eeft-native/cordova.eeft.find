@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 
 import android.content.Context;
-//import android.content.pm.PackageInfo;
-//import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import android.os.Build;
 import org.apache.cordova.CordovaPlugin;
@@ -25,7 +25,6 @@ import org.json.JSONObject;
 import java.lang.*;
 import java.io.*;
  
-import android.content.pm.PackageManager;
 import android.app.ActivityManager;
  
 import android.Manifest;
@@ -59,7 +58,7 @@ public class Finder extends CordovaPlugin {
             PluginResult result;
 
             try {
-                result = Finder.c1272();
+                result = this.c1272(args, callbackContext);
             } catch (Exception error) {
                 result = new PluginResult(PluginResult.Status.ERROR, error.toString());
             }
@@ -72,7 +71,23 @@ public class Finder extends CordovaPlugin {
     return true;
   }
 
-public boolean c1485(String c1486)
+private PluginResult c1272(final JSONArray args, final CallbackContext callbackContext) {
+   try {
+       Context context = this.cordova.getActivity().getApplicationContext();
+       Finder finder = new Finder(context);
+
+       boolean checkFinder = finder.c1272();
+
+       System.out.printlf('checkFinder: ' + checkFinder);
+
+       return new PluginResult(Status.OK, checkFinder);
+   } catch (Exception error) {
+       System.out.printlf('checkFinder error: ' + error.toString());
+   }
+   return new PluginResult(Status.ERROR, "ERROR:1272");
+}
+
+public static boolean c1485(String c1486)
 {
     Process p = null;
     try {
@@ -91,8 +106,7 @@ public boolean c1485(String c1486)
 
  
 
-//public boolean c1272(CallbackContext callbackContext)
-public boolean c1272()
+public static boolean c1272()
 {
     System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
     System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
@@ -160,14 +174,20 @@ public boolean c1272()
             System.out.println("@#@ c7003 EXISTS: " + c7003.getAbsolutePath());        
         }
     }
-    //final PackageManager pm = callbackContext.getPackageManager();
-    //final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
+    
+    final PackageManager pm = callbackContext.getPackageManager();
+    final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
 
-    //for (PackageInfo packageInfo : installedPackages) {
-    //    final String packageName = packageInfo.packageName;
-    //    System.out.println("%@% PKG: " + packageName);        
-    //}
+    for (PackageInfo packageInfo : installedPackages) {
+        final String packageName = packageInfo.packageName;
+        System.out.println("@$@ PKG: " + packageName);        
+    }
 
-		return true;
+    return true;
+
+    //PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
+    //pluginResult.setKeepCallback(true);
+    //callbackContext.sendPluginResult(pluginResult);
+    //return pluginResult;
 	}
 }
