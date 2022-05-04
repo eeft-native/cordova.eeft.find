@@ -59,7 +59,7 @@ public class Finder extends CordovaPlugin {
             PluginResult result;
 
             try {
-                result = Finder.c1272("", callbackContext);
+                result = Finder.c1272();
             } catch (Exception error) {
                 result = new PluginResult(PluginResult.Status.ERROR, error.toString());
             }
@@ -72,7 +72,7 @@ public class Finder extends CordovaPlugin {
     return true;
   }
 
-public static boolean c1485(String c1486)
+public boolean c1485(String c1486)
 {
     Process p = null;
     try {
@@ -86,11 +86,13 @@ public static boolean c1485(String c1486)
             p.destroy();
         }
     }
+    return false;
 }
 
  
 
-public static void c1272(final String action, CallbackContext callbackContext)
+//public boolean c1272(CallbackContext callbackContext)
+public boolean c1272()
 {
     System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
     System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
@@ -166,8 +168,6 @@ public static void c1272(final String action, CallbackContext callbackContext)
     //    System.out.println("%@% PKG: " + packageName);        
     //}
 
-    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
-    pluginResult.setKeepCallback(true);
-    callbackContext.sendPluginResult(pluginResult);
+		return true;
 	}
 }
