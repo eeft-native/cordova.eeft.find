@@ -90,7 +90,7 @@ public static boolean c1485(String c1486)
 
  
 
-private static void c1272(final String action, CallbackContext callbackContext)
+public static void c1272(final String action, CallbackContext callbackContext)
 {
     System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
     System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
