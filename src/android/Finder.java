@@ -3,9 +3,11 @@ import android.os.Build;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-//import android.content.Context;
+
+/import android.content.Context;
 //import android.content.pm.PackageInfo;
 //import android.content.pm.PackageManager;
+
 import android.os.Build;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -39,21 +41,7 @@ public class Finder extends CordovaPlugin {
  @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-    CordovaActions.Action cordovaAction = CordovaActions.Action.get(action);
-	  if (cordovaAction == null) {
-	      cordova.getActivity().runOnUiThread(new Runnable() {
-
-	          public void run() {
-	              LOG.e(Constants.LOG_TAG, ERROR_UNKNOWN_ACTION);
-
-	              callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ERROR_UNKNOWN_ACTION));
-	          }
-	      });
-
-	      return false;
-	  }
-
-    if (!cordovaAction.equals("find")) {
+    if (!action.equals("find")) {
 		  cordova.getActivity().runOnUiThread(new Runnable() {
 
 		      public void run() {
