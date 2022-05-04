@@ -11,7 +11,7 @@ import android.content.Context;
 import android.os.Build;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-import org.apache.cordova.LOG;
+//import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PermissionHelper;
 
@@ -35,8 +35,7 @@ import android.Manifest;
  */
 public class Finder extends CordovaPlugin {
 
-  public static final String LOG_TAG = "find";
-	public static final String ERROR_UNKNOWN_ACTION = "Unknown action";
+	public static final String ERROR_UNKNOWN_ACTION = "@#@ Unknown action";
 
  @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -45,7 +44,7 @@ public class Finder extends CordovaPlugin {
 		  cordova.getActivity().runOnUiThread(new Runnable() {
 
 		      public void run() {
-		          LOG.e(Constants.LOG_TAG, ERROR_UNKNOWN_ACTION);
+							System.out.println(ERROR_UNKNOWN_ACTION);
 		          callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ERROR_UNKNOWN_ACTION));
 		      }
 		  });
