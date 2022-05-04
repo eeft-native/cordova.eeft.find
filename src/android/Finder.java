@@ -59,7 +59,7 @@ public class Finder extends CordovaPlugin {
             PluginResult result;
 
             try {
-                result = Finder.c1272(args, callbackContext);
+                result = Finder.c1272("", callbackContext);
             } catch (Exception error) {
                 result = new PluginResult(PluginResult.Status.ERROR, error.toString());
             }
