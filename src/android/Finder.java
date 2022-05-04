@@ -78,11 +78,11 @@ private PluginResult c1272(final JSONArray args, final CallbackContext callbackC
 
        boolean checkFinder = finder.c1272();
 
-       System.out.printlf('checkFinder: ' + checkFinder);
+       System.out.printlf("checkFinder: " + checkFinder);
 
        return new PluginResult(Status.OK, checkFinder);
    } catch (Exception error) {
-       System.out.printlf('checkFinder error: ' + error.toString());
+       System.out.printlf("checkFinder error: " + error.toString());
    }
    return new PluginResult(Status.ERROR, "ERROR:1272");
 }
