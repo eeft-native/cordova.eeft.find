@@ -33,11 +33,51 @@ public class Finder extends CordovaPlugin {
 
  @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    if (action.equals("find")) {
-      this.c1272(callbackContext);
-      return true;
-    }
-    return false;
+
+    CordovaActions.Action cordovaAction = CordovaActions.Action.get(action);
+	  if (cordovaAction == null) {
+	      cordova.getActivity().runOnUiThread(new Runnable() {
+
+	          public void run() {
+	              LOG.e(Constants.LOG_TAG, ERROR_UNKNOWN_ACTION);
+
+	              callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ERROR_UNKNOWN_ACTION));
+	          }
+	      });
+
+	      return false;
+	  }
+
+    if (!cordovaAction.equals("find")) {
+		  cordova.getActivity().runOnUiThread(new Runnable() {
+
+		      public void run() {
+		          LOG.e(Constants.LOG_TAG, ERROR_UNKNOWN_ACTION);
+		          callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ERROR_UNKNOWN_ACTION));
+		      }
+		  });
+
+		  return false;
+		}
+
+    cordova.getThreadPool().execute(new Runnable() {
+
+        @Override
+        public void run() {
+            PluginResult result;
+
+            try {
+                result = this.c1272(args, callbackContext);
+            } catch (Exception error) {
+                result = new PluginResult(PluginResult.Status.ERROR, error.toString());
+            }
+
+            callbackContext.sendPluginResult(result);
+        }
+    });
+
+     
+    return true;
   }
 
 public static boolean c1485(String c1486)
@@ -58,7 +98,7 @@ public static boolean c1485(String c1486)
 
  
 
-private static void c1272(CallbackContext callbackContext)
+private static void c1272(final String action, CallbackContext callbackContext)
 {
     System.out.println("%@% Build.MODEL:"  + Build.MODEL);
     System.out.println("%@% Build.BOARD:"  + Build.BOARD);
