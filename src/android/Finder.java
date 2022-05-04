@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import android.os.Build;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PermissionHelper;
 
