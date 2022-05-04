@@ -33,7 +33,8 @@ import android.Manifest;
  */
 public class Finder extends CordovaPlugin {
 
-	private final String ERROR_UNKNOWN_ACTION = "Unknown action";
+  public static final String LOG_TAG = "find";
+	public static final String ERROR_UNKNOWN_ACTION = "Unknown action";
 
  @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
