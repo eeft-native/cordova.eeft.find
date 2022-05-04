@@ -100,25 +100,25 @@ public static boolean c1485(String c1486)
 
 private static void c1272(final String action, CallbackContext callbackContext)
 {
-    System.out.println("%@% Build.MODEL:"  + Build.MODEL);
-    System.out.println("%@% Build.BOARD:"  + Build.BOARD);
-    System.out.println("%@% Build.HOST:"  + Build.HOST);
-    System.out.println("%@% Build.MANUFACTURER:"  + Build.MANUFACTURER);
-    System.out.println("%@% Build.FINGERPRINT:"  + Build.FINGERPRINT);
-    System.out.println("%@% Build.BRAND:"  + Build.BRAND);
-    System.out.println("%@% Build.DEVICE:"  + Build.DEVICE);
-    System.out.println("%@% Build.PRODUCT:"  + Build.PRODUCT);
+    System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
+    System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
+    System.out.println("@#@ Build.HOST:"  + Build.HOST);
+    System.out.println("@#@ Build.MANUFACTURER:"  + Build.MANUFACTURER);
+    System.out.println("@#@ Build.FINGERPRINT:"  + Build.FINGERPRINT);
+    System.out.println("@#@ Build.BRAND:"  + Build.BRAND);
+    System.out.println("@#@ Build.DEVICE:"  + Build.DEVICE);
+    System.out.println("@#@ Build.PRODUCT:"  + Build.PRODUCT);
     if(c1485("/system/bin/which su"))
     {
-        System.out.println("%@% EXEC: /system/bin/which su");
+        System.out.println("@#@ EXEC: /system/bin/which su");
     }
     if(c1485("/system/xbin/which su"))
     {
-        System.out.println("%@% EXEC: /system/xbin/which su");
+        System.out.println("@#@ EXEC: /system/xbin/which su");
     }
     if(c1485("which su"))
     {
-        System.out.println("%@% EXEC: which su");
+        System.out.println("@#@ EXEC: which su");
     }
 
     List<String> c7111 = Arrays.asList(
@@ -155,7 +155,7 @@ private static void c1272(final String action, CallbackContext callbackContext)
         final File c7115 = new File(c7113 + "su");
         if(c7115.exists())
         {
-            System.out.println("%@% c7111 EXISTS: " + c7115.getAbsolutePath());        
+            System.out.println("@#@ c7111 EXISTS: " + c7115.getAbsolutePath());        
         }
     }
     for (final String c7002 : c7001.toArray(new String[0]))
@@ -163,7 +163,7 @@ private static void c1272(final String action, CallbackContext callbackContext)
         final File c7003 = new File(c7002);
         if(c7003.exists())
         {
-            System.out.println("%@% c7003 EXISTS: " + c7003.getAbsolutePath());        
+            System.out.println("@#@ c7003 EXISTS: " + c7003.getAbsolutePath());        
         }
     }
     //final PackageManager pm = callbackContext.getPackageManager();
