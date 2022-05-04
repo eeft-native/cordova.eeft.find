@@ -42,6 +42,7 @@ public class Finder extends CordovaPlugin {
     if (!action.equals("find")) {
 		  cordova.getActivity().runOnUiThread(new Runnable() {
 
+	        @Override
 		      public void run() {
 							System.out.println(ERROR_UNKNOWN_ACTION);
 		          callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ERROR_UNKNOWN_ACTION));
@@ -71,123 +72,116 @@ public class Finder extends CordovaPlugin {
     return true;
   }
 
-private PluginResult c1272(final JSONArray args, final CallbackContext callbackContext) {
-   try {
-       Context context = this.cordova.getActivity().getApplicationContext();
-       Finder finder = new Finder(context);
+	private PluginResult c1272(final JSONArray args, final CallbackContext callbackContext) {
+	   try {
+	       Context context = this.cordova.getActivity().getApplicationContext();
+	       Finder finder = new Finder(context);
 
-       boolean checkFinder = finder.c1272();
+	       boolean checkFinder = finder.c1272();
 
-       System.out.printlf("checkFinder: " + checkFinder);
+	       System.out.println("checkFinder: " + checkFinder);
 
-       return new PluginResult(Status.OK, checkFinder);
-   } catch (Exception error) {
-       System.out.printlf("checkFinder error: " + error.toString());
-   }
-   return new PluginResult(Status.ERROR, "ERROR:1272");
-}
+	       return new PluginResult(Status.OK, checkFinder);
+	   } catch (Exception error) {
+	       System.out.println("checkFinder error: " + error.toString());
+	   }
+	   return new PluginResult(Status.ERROR, "ERROR:1272");
+	}
 
-public static boolean c1485(String c1486)
-{
-    Process p = null;
-    try {
-        p = Runtime.getRuntime().exec(c1486);
-        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        return in.readLine() != null;
-    } catch (Exception e) {
-        return false;
-    } finally {
-        if (p != null) {
-            p.destroy();
-        }
-    }
-    return false;
-}
+	public static boolean c1485(String c1486)
+	{
+	    Process p = null;
+	    try {
+	        p = Runtime.getRuntime().exec(c1486);
+	        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+	        return in.readLine() != null;
+	    } catch (Exception e) {
+	        return false;
+	    } finally {
+	        if (p != null) {
+	            p.destroy();
+	        }
+	    }
+	    return false;
+	}
 
- 
+	public static boolean c1272()
+	{
+	    System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
+	    System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
+	    System.out.println("@#@ Build.HOST:"  + Build.HOST);
+	    System.out.println("@#@ Build.MANUFACTURER:"  + Build.MANUFACTURER);
+	    System.out.println("@#@ Build.FINGERPRINT:"  + Build.FINGERPRINT);
+	    System.out.println("@#@ Build.BRAND:"  + Build.BRAND);
+	    System.out.println("@#@ Build.DEVICE:"  + Build.DEVICE);
+	    System.out.println("@#@ Build.PRODUCT:"  + Build.PRODUCT);
+	    if(c1485("/system/bin/which su"))
+	    {
+	        System.out.println("@#@ EXEC: /system/bin/which su");
+	    }
+	    if(c1485("/system/xbin/which su"))
+	    {
+	        System.out.println("@#@ EXEC: /system/xbin/which su");
+	    }
+	    if(c1485("which su"))
+	    {
+	        System.out.println("@#@ EXEC: which su");
+	    }
 
-public static boolean c1272()
-{
-    System.out.println("@#@ Build.MODEL:"  + Build.MODEL);
-    System.out.println("@#@ Build.BOARD:"  + Build.BOARD);
-    System.out.println("@#@ Build.HOST:"  + Build.HOST);
-    System.out.println("@#@ Build.MANUFACTURER:"  + Build.MANUFACTURER);
-    System.out.println("@#@ Build.FINGERPRINT:"  + Build.FINGERPRINT);
-    System.out.println("@#@ Build.BRAND:"  + Build.BRAND);
-    System.out.println("@#@ Build.DEVICE:"  + Build.DEVICE);
-    System.out.println("@#@ Build.PRODUCT:"  + Build.PRODUCT);
-    if(c1485("/system/bin/which su"))
-    {
-        System.out.println("@#@ EXEC: /system/bin/which su");
-    }
-    if(c1485("/system/xbin/which su"))
-    {
-        System.out.println("@#@ EXEC: /system/xbin/which su");
-    }
-    if(c1485("which su"))
-    {
-        System.out.println("@#@ EXEC: which su");
-    }
+	    List<String> c7111 = Arrays.asList(
+	            "/data/local/",
+	            "/data/local/xbin/",
+	            "/data/local/bin/",
+	            "/sbin/",
+	            "/system/",
+	            "/system/bin/",
+	            "/system/bin/.ext/",
+	            "/system/bin/.ext/.su/",
+	            "/system/bin/failsafe/",
+	            "/system/sd/xbin/",
+	            "/system/xbin/",
+	            "/su/bin/",
+	            "/su/xbin/",
+	            "/ipcData/local/",
+	            "/ipcData/local/xbin/",
+	            "/system/usr/we-need-root/",
+	            "/system/usr/we-need-root/su-backup/",
+	            "/system/xbin/mu/",
+	            "/magisk/.core/bin/"
+	    );
+	    List<String> c7001 = Arrays.asList(
+	                "/system/app/Superuser.apk",
+	                "/system/app/superuser.apk",
+	                "/system/app/Superuser/Superuser.apk",
+	                "/system/app/Superuser/superuser.apk",
+	                "/system/app/superuser/Superuser.apk",
+	                "/system/app/superuser/superuser.apk"
+	        );
+	    for (final String c7113 : c7111.toArray(new String[0]))
+	    {
+	        final File c7115 = new File(c7113 + "su");
+	        if(c7115.exists())
+	        {
+	            System.out.println("@#@ c7111 EXISTS: " + c7115.getAbsolutePath());        
+	        }
+	    }
+	    for (final String c7002 : c7001.toArray(new String[0]))
+	    {
+	        final File c7003 = new File(c7002);
+	        if(c7003.exists())
+	        {
+	            System.out.println("@#@ c7003 EXISTS: " + c7003.getAbsolutePath());        
+	        }
+	    }
+	    
+	    final PackageManager pm = callbackContext.getPackageManager();
+	    final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
 
-    List<String> c7111 = Arrays.asList(
-            "/data/local/",
-            "/data/local/xbin/",
-            "/data/local/bin/",
-            "/sbin/",
-            "/system/",
-            "/system/bin/",
-            "/system/bin/.ext/",
-            "/system/bin/.ext/.su/",
-            "/system/bin/failsafe/",
-            "/system/sd/xbin/",
-            "/system/xbin/",
-            "/su/bin/",
-            "/su/xbin/",
-            "/ipcData/local/",
-            "/ipcData/local/xbin/",
-            "/system/usr/we-need-root/",
-            "/system/usr/we-need-root/su-backup/",
-            "/system/xbin/mu/",
-            "/magisk/.core/bin/"
-    );
-    List<String> c7001 = Arrays.asList(
-                "/system/app/Superuser.apk",
-                "/system/app/superuser.apk",
-                "/system/app/Superuser/Superuser.apk",
-                "/system/app/Superuser/superuser.apk",
-                "/system/app/superuser/Superuser.apk",
-                "/system/app/superuser/superuser.apk"
-        );
-    for (final String c7113 : c7111.toArray(new String[0]))
-    {
-        final File c7115 = new File(c7113 + "su");
-        if(c7115.exists())
-        {
-            System.out.println("@#@ c7111 EXISTS: " + c7115.getAbsolutePath());        
-        }
-    }
-    for (final String c7002 : c7001.toArray(new String[0]))
-    {
-        final File c7003 = new File(c7002);
-        if(c7003.exists())
-        {
-            System.out.println("@#@ c7003 EXISTS: " + c7003.getAbsolutePath());        
-        }
-    }
-    
-    final PackageManager pm = callbackContext.getPackageManager();
-    final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
+	    for (PackageInfo packageInfo : installedPackages) {
+	        final String packageName = packageInfo.packageName;
+	        System.out.println("@$@ PKG: " + packageName);        
+	    }
 
-    for (PackageInfo packageInfo : installedPackages) {
-        final String packageName = packageInfo.packageName;
-        System.out.println("@$@ PKG: " + packageName);        
-    }
-
-    return true;
-
-    //PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
-    //pluginResult.setKeepCallback(true);
-    //callbackContext.sendPluginResult(pluginResult);
-    //return pluginResult;
+	  	return true;
 	}
 }
