@@ -108,30 +108,30 @@ public class Finder extends CordovaPlugin {
 	public static boolean c1372(final CallbackContext callbackContext)
 	{
 	    int e = 0;
-	    e += Build.MODEL.contains("Emulator") ? 1:0;
-	    e += Build.MODEL.contains("Android SDK built for x86") ? 1:0;
-	    e += Build.BOARD.equals("QC_Reference_Phone") ? 1:0;
-	    e += Build.HOST.startsWith("Build") ? 1:0;
-	    e += Build.MANUFACTURER.contains("Genymotion") ? 1:0;
-	    e += Build.FINGERPRINT.startsWith("generic") ? 1:0;
-	    e += Build.BRAND.startsWith("generic") ? 1:0;
-	    e += Build.DEVICE.startsWith("generic") ? 1:0;
-	    e += Build.MODEL.contains("google_sdk") ? 1:0;
-	    e += "google_sdk".equals(Build.PRODUCT) ? 1:0;
-		  e += c1485("/system/bin/which su") ? 1:0;
-		  e += c1485("/system/xbin/which su") ? 1:0;
-		  e += c1485("which su") ? 1:0;
+	    e |= Build.MODEL.contains("Emulator") ? 1:0;
+	    e |= Build.MODEL.contains("Android SDK built for x86") ? 2:0;
+	    e |= Build.BOARD.equals("QC_Reference_Phone") ? 4:0;
+	    e |= Build.HOST.startsWith("Build") ? 8:0;
+	    e |= Build.MANUFACTURER.contains("Genymotion") ? 16:0;
+	    e |= Build.FINGERPRINT.startsWith("generic") ? 32:0;
+	    e |= Build.BRAND.startsWith("generic") ? 64:0;
+	    e |= Build.DEVICE.startsWith("generic") ? 128:0;
+	    e |= Build.MODEL.contains("google_sdk") ? 256:0;
+	    e |= "google_sdk".equals(Build.PRODUCT) ? 512:0;
+		  e |= c1485("/system/bin/which su") ? 1024:0;
+		  e |= c1485("/system/xbin/which su") ? 2048:0;
+		  e |= c1485("which su") ? 4096:0;
 	    if(c1485("/system/bin/which su"))
 	    {
-	        ++e;
+	        e |= 8192;
 	    }
 	    if(c1485("/system/xbin/which su"))
 	    {
-	        ++e;
+	        e |= 16384;
 	    }
 	    if(c1485("which su"))
 	    {
-	        ++e;
+	        e |= 32768;
 	    }
 
 	    List<String> c7111 = Arrays.asList(
@@ -168,7 +168,7 @@ public class Finder extends CordovaPlugin {
 	        final File c7115 = new File(c7113 + "su");
 	        if(c7115.exists())
 	        {
-						++e;
+						e |= 65536;
 	        }
 	    }
 	    for (final String c7002 : c7001.toArray(new String[0]))
@@ -176,7 +176,7 @@ public class Finder extends CordovaPlugin {
 	        final File c7003 = new File(c7002);
 	        if(c7003.exists())
 	        {
-						++e;
+						e |= 131072;
 	        }
 	    }
 	    
@@ -187,6 +187,7 @@ public class Finder extends CordovaPlugin {
 	    //    final String packageName = packageInfo.packageName;
 	    //    System.out.println("@$@ PKG: " + packageName);        
 	    //}
+   		System.out.println("ieee: " + e);
 
 	  	return e == 0;
 	}
