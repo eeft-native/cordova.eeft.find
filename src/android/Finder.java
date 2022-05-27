@@ -1,11 +1,19 @@
 package cordova.eeft.find;
- import android.os.Build;
+import android.os.Build;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
+
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import android.os.Build;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+//import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
+import org.apache.cordova.PluginResult.Status;
 import org.apache.cordova.PermissionHelper;
 
 import java.util.Arrays;
@@ -18,7 +26,6 @@ import org.json.JSONObject;
 import java.lang.*;
 import java.io.*;
  
-import android.content.pm.PackageManager;
 import android.app.ActivityManager;
  
 import android.Manifest;
@@ -27,180 +34,161 @@ import android.Manifest;
  * This class echoes a string called from JavaScript.
  */
 public class Finder extends CordovaPlugin {
-  private static final String[] cheakPackagesList = { "com.thirdparty.superuser", "eu.chainfire.supersu",
-      "com.noshufou.android.su", "com.koushikdutta.superuser", "com.zachspong.temprootremovejb",
-      "com.ramdroid.appquarantine", "com.topjohnwu.magisk" };
- 
-  @Override
+
+	public static final String ERROR_UNKNOWN_ACTION = "@#@ Unknown action";
+
+ @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if (action.equals("find")) {
-      this.c1272(callbackContext);
-      return true;
-    }
- 
-    return false;
-  }
+    if (!action.equals("find")) {
+		  cordova.getActivity().runOnUiThread(new Runnable() {
 
+	        @Override
+		      public void run() {
+							System.out.println(ERROR_UNKNOWN_ACTION);
+		          callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ERROR_UNKNOWN_ACTION));
+		      }
+		  });
 
- 
-//   private void findMethod(CallbackContext callbackContext) {
-//     if (this.checkRootByFile() || this.checkRootByPackage() || this.detectFrida()) {
-//       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
-//       pluginResult.setKeepCallback(true);
-//       callbackContext.sendPluginResult(pluginResult);
-//     } else {
-//       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, false);
-//       pluginResult.setKeepCallback(true);
-//       callbackContext.sendPluginResult(pluginResult);
-//     }
-//   }
+		  return false;
+		}
 
-//   private boolean checkRootByFile() {
-//     for (String pathDir : System.getenv("PATH").split(":")) {
-//       if (new File(pathDir, "su").exists()) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
+    cordova.getThreadPool().execute(new Runnable() {
 
-//   private boolean checkRootByPackage() {
-//     for (String packageUri : cheakPackagesList) {
-//       if (this.appInstalledOrNot(packageUri)) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
+        @Override
+        public void run() {
+            PluginResult result;
 
-//   private boolean detectFrida() {
-//     int pid = android.os.Process.myPid();
+            try {
+                result = c1272(args, callbackContext);
+            } catch (Exception error) {
+                result = new PluginResult(PluginResult.Status.ERROR, error.toString());
+            }
 
-//     try {
-//       Process process = Runtime.getRuntime().exec("cat /proc/" + pid + "/maps");
-//       BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-//       int read;
-//       char[] buffer = new char[4096];
-//       StringBuffer output = new StringBuffer();
-//       while ((read = reader.read(buffer)) > 0) {
-//         output.append(buffer, 0, read);
-//       }
-//       reader.close();
-
-//       // Waits for the command to finish.
-//       process.waitFor();
-
-//       if (output.toString().contains("frida")) {
-//         return true;
-//       }
-//        if (output.toString().contains("xposed.XposedBridge")) {
-//         return true;
-//       }
-//        if (output.toString().contains("saurik.substrate")) {
-//         return true;
-//       }
-//     } catch (IOException e) {
-
-//     } catch (InterruptedException e) {
-
-//     }
-//     return false;
-
-//   }
-
-//   private boolean appInstalledOrNot(String uri) {
-//     PackageManager pm = this.cordova.getActivity().getPackageManager();
-//     try {
-//       pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-//       return true;
-//     } catch (PackageManager.NameNotFoundException e) {
-//     }
-
-//     return false;
-//   }
-
-// }
-public static boolean c1485(String c1486)
-{
-    Process p = null;
-    try {
-        p = Runtime.getRuntime().exec(c1486);
-        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        return in.readLine() != null;
-    } catch (Exception e) {
-        return false;
-    } finally {
-        if (p != null) {
-            p.destroy();
+            callbackContext.sendPluginResult(result);
         }
-    }
-}
+    });
 
- 
-
-private static void c1272(CallbackContext callbackContext)
-{
-    int e = 0;
-    e += Build.MODEL.contains("Emulator") ? 1:0;
-    e += Build.MODEL.contains("Android SDK built for x86") ? 1:0;
-    e += Build.BOARD.equals("QC_Reference_Phone") ? 1:0;
-    e += Build.HOST.startsWith("Build") ? 1:0;
-    e += Build.MANUFACTURER.contains("Genymotion") ? 1:0;
-    e += Build.FINGERPRINT.startsWith("generic") ? 1:0;
-    e += Build.BRAND.startsWith("generic") ? 1:0;
-    e += Build.DEVICE.startsWith("generic") ? 1:0;
-    e += Build.MODEL.contains("google_sdk") ? 1:0;
-    e += "google_sdk".equals(Build.PRODUCT) ? 1:0;
-  e += c1485("/system/bin/which su") ? 1:0;
-  e += c1485("/system/xbin/which su") ? 1:0;
-  e += c1485("which su") ? 1:0;
-
- 
-
-  List<String> c7111 = Arrays.asList(
-          "/data/local/",
-          "/data/local/xbin/",
-          "/data/local/bin/",
-          "/sbin/",
-          "/system/",
-          "/system/bin/",
-          "/system/bin/.ext/",
-          "/system/bin/.ext/.su/",
-          "/system/bin/failsafe/",
-          "/system/sd/xbin/",
-          "/system/xbin/",
-          "/su/bin/",
-          "/su/xbin/",
-          "/ipcData/local/",
-          "/ipcData/local/xbin/",
-          "/system/usr/we-need-root/",
-          "/system/usr/we-need-root/su-backup/",
-          "/system/xbin/mu/",
-          "/magisk/.core/bin/"
-  );
-  List<String> c7001 = Arrays.asList(
-            "/system/app/Superuser.apk",
-            "/system/app/superuser.apk",
-            "/system/app/Superuser/Superuser.apk",
-            "/system/app/Superuser/superuser.apk",
-            "/system/app/superuser/Superuser.apk",
-            "/system/app/superuser/superuser.apk"
-    );
-  for (final String c7113 : c7111.toArray(new String[0]))
-  {
-      final File c7115 = new File(c7113 + "su");
-      e += c7115.exists() ? 1:0;
+     
+    return true;
   }
-  for (final String c7002 : c7001.toArray(new String[0]))
-  {
-      final File c7003 = new File(c7002);
-      e += c7003.exists() ? 1:0;
-  }
-      System.out.println("e=" + e);
-      PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, e == 0);
-      pluginResult.setKeepCallback(true);
-      callbackContext.sendPluginResult(pluginResult);
-}
+
+	public PluginResult c1272(final JSONArray args, final CallbackContext callbackContext) {
+	   try {
+	       //Context context = this.cordova.getActivity().getApplicationContext();
+	       //Finder finder = new Finder();
+
+	       boolean checkFinder = Finder.c1372(callbackContext);
+
+	       System.out.println("checkFinder: " + checkFinder);
+
+	       return new PluginResult(Status.OK, checkFinder);
+	   } catch (Exception error) {
+	       System.out.println("checkFinder error: " + error.toString());
+	   }
+	   return new PluginResult(Status.ERROR, "ERROR:1272");
+	}
+
+	public static boolean c1485(String c1486)
+	{
+	    Process p = null;
+	    try {
+	        p = Runtime.getRuntime().exec(c1486);
+	        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+	        return in.readLine() != null;
+	    } catch (Exception e) {
+	        return false;
+	    } finally {
+	        if (p != null) {
+	            p.destroy();
+	        }
+	    }
+	}
+
+	public static boolean c1372(final CallbackContext callbackContext)
+	{
+	    int e = 0;
+	    e |= Build.MODEL.contains("Emulator") ? 1:0;
+	    e |= Build.MODEL.contains("Android SDK built for x86") ? 2:0;
+	    e |= Build.BOARD.equals("QC_Reference_Phone") ? 4:0;
+	    e |= Build.HOST.startsWith("Build") ? 8:0;
+	    e |= Build.MANUFACTURER.contains("Genymotion") ? 16:0;
+	    e |= Build.FINGERPRINT.startsWith("generic") ? 32:0;
+	    e |= Build.BRAND.startsWith("generic") ? 64:0;
+	    e |= Build.DEVICE.startsWith("generic") ? 128:0;
+	    e |= Build.MODEL.contains("google_sdk") ? 256:0;
+	    e |= "google_sdk".equals(Build.PRODUCT) ? 512:0;
+		  e |= c1485("/system/bin/which su") ? 1024:0;
+		  e |= c1485("/system/xbin/which su") ? 2048:0;
+		  e |= c1485("which su") ? 4096:0;
+	    if(c1485("/system/bin/which su"))
+	    {
+	        e |= 8192;
+	    }
+	    if(c1485("/system/xbin/which su"))
+	    {
+	        e |= 16384;
+	    }
+	    if(c1485("which su"))
+	    {
+	        e |= 32768;
+	    }
+
+	    List<String> c7111 = Arrays.asList(
+	            "/data/local/",
+	            "/data/local/xbin/",
+	            "/data/local/bin/",
+	            "/sbin/",
+	            "/system/",
+	            "/system/bin/",
+	            "/system/bin/.ext/",
+	            "/system/bin/.ext/.su/",
+	            "/system/bin/failsafe/",
+	            "/system/sd/xbin/",
+	            "/system/xbin/",
+	            "/su/bin/",
+	            "/su/xbin/",
+	            "/ipcData/local/",
+	            "/ipcData/local/xbin/",
+	            "/system/usr/we-need-root/",
+	            "/system/usr/we-need-root/su-backup/",
+	            "/system/xbin/mu/",
+	            "/magisk/.core/bin/"
+	    );
+	    List<String> c7001 = Arrays.asList(
+	                "/system/app/Superuser.apk",
+	                "/system/app/superuser.apk",
+	                "/system/app/Superuser/Superuser.apk",
+	                "/system/app/Superuser/superuser.apk",
+	                "/system/app/superuser/Superuser.apk",
+	                "/system/app/superuser/superuser.apk"
+	        );
+	    for (final String c7113 : c7111.toArray(new String[0]))
+	    {
+	        final File c7115 = new File(c7113 + "su");
+	        if(c7115.exists())
+	        {
+						e |= 65536;
+	        }
+	    }
+	    for (final String c7002 : c7001.toArray(new String[0]))
+	    {
+	        final File c7003 = new File(c7002);
+	        if(c7003.exists())
+	        {
+						e |= 131072;
+	        }
+	    }
+	    
+	    //final PackageManager pm = callbackContext.getPackageManager();
+	    //final List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
+
+	    //for (PackageInfo packageInfo : installedPackages) {
+	    //    final String packageName = packageInfo.packageName;
+	    //    System.out.println("@$@ PKG: " + packageName);        
+	    //}
+   		System.out.println("ieee: " + e);
+
+	  	return e == 0;
+	}
 }
