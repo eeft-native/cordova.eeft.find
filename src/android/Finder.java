@@ -111,7 +111,6 @@ public class Finder extends CordovaPlugin {
 	    e |= Build.MODEL.contains("Emulator") ? 1:0;
 	    e |= Build.MODEL.contains("Android SDK built for x86") ? 2:0;
 	    e |= Build.BOARD.equals("QC_Reference_Phone") ? 4:0;
-	    e |= Build.HOST.startsWith("Build") ? 8:0;
 	    e |= Build.MANUFACTURER.contains("Genymotion") ? 16:0;
 	    e |= Build.FINGERPRINT.startsWith("generic") ? 32:0;
 	    e |= Build.BRAND.startsWith("generic") ? 64:0;
